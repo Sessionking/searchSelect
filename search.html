@@ -1,64 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
+
 <head>
-    <meta charset="UTF-8">
-    <title>点击搜索框提示搜索内容</title>
-    <script src="jquery-1.11.0.js"></script>
-    <script src="angular.min.js"></script>
-    <style>
-        .search-div {
-            margin: 200px auto 0px 600px;
-            width: 300px;
-        }
+  <meta charset="UTF-8">
+  <title>点击搜索框提示搜索内容</title>
+  <script src="jquery-1.11.0.js"></script>
+  <script src="angular.min.js"></script>
+  <style>
+    .search-div {
+      margin: 200px auto 0px 600px;
+      width: 300px;
+    }
 
-        input {
-            border: 1px solid #9da;
-            width: 200px;
-        }
+    input {
+      border: 1px solid #9da;
+      width: 200px;
+      font-size: 20px;
+    }
 
-        ul {
-            width: 202px;
-            list-style: none;
-            margin-top:0px;
-            padding-left:0px;
-            border:1px solid #ddd;
-            color: #8f8f8f;
-            font-family: "Arial Hebrew Scholar";
-        }
-        li:hover{
-            background-color: #ddd;
-        }
-    </style>
+    ul {
+      width: 202px;
+      list-style: none;
+      margin-top: 0px;
+      padding-left: 0px;
+      color: #8f8f8f;
+      font-family: "Arial Hebrew Scholar";
+    }
+
+    li {
+      width: 201px;
+      border-bottom: 1px dashed #9da;
+      border-left: 1px dashed #9da;
+      border-right: 1px dashed #9da;
+    }
+
+    li:hover {
+      background-color: #ddd;
+    }
+  </style>
 </head>
+
 <body>
-<div class="search-div" ng-controller='searchController'>
+  <div class="search-div" ng-controller='searchController'>
     <input type="text" ng-model="search" ng-change="change()" placeholder="search...">
     <ul>
-        <li ng-repeat="result in results" ng-click='click(this)'>{{result}}</li>
+      <li ng-repeat="result in results" ng-click='click(this)'>{{result}}</li>
     </ul>
-</div>
-<script>
-    angular.module("myApp", []).controller('searchController', ['$scope', function ($scope) {
-        $scope.search = '';//输入框绑定空
-        var array = ['你好', '我是谁', "你在哪里","你是谁"];//搜索内容
-        //输入框发生改变
-        $scope.change = function () {
-            $scope.results = [];//声明数组
-            var inputVal = $scope.search;
-            if (inputVal != '') {
-                for (var i = 0; i < array.length; i++) {
-                    if (array[i].indexOf(inputVal) > -1) {
-                        $scope.results.push(array[i]);
-                    }
-                }
+  </div>
+  <script>
+    angular.module("myApp", []).controller('searchController', ['$scope', function($scope) {
+      $scope.search = ''; //输入框绑定空
+      var array = ['你好', '我是谁', "你在哪里", "你是谁"]; //搜索内容
+      //输入框发生改变
+      $scope.change = function() {
+          $scope.results = []; //声明数组
+          var inputVal = $scope.search;
+          if (inputVal != '') {
+            for (var i = 0; i < array.length; i++) {
+              if (array[i].indexOf(inputVal) > -1) {
+                $scope.results.push(array[i]);
+              }
             }
+          }
         }
         //li点击事件
-        $scope.click = function (li) {
-            $scope.search = li.result;
-            $scope.results = [];
-        }
+      $scope.click = function(li) {
+        $scope.search = li.result;
+        $scope.results = [];
+      }
     }])
-</script>
+  </script>
 </body>
+
 </html>
